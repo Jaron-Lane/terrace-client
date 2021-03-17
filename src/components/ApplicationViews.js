@@ -15,8 +15,12 @@ export const ApplicationViews = () => {
             </PlantProvider>
 
             <PlantProvider>
-                <Route path="/plants">
+                <Route exact path="/plants">
                     <PlantList />
+                </Route>
+
+                <Route exact path="/plants/create">
+                    <PlantForm />
                 </Route>
             </PlantProvider>
 
