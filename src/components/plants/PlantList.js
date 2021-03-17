@@ -1,6 +1,6 @@
 import { React, useContext, useEffect } from "react";
 import Plant from "./Plant";
-import "./Plant.css";
+import "./Plants.css";
 import { PlantContext } from "./PlantProvider";
 
 export const PlantList = () => {

@@ -1,7 +1,7 @@
 import React from "react"
 import { Route, Redirect } from "react-router-dom"
 import { ApplicationViews } from "./ApplicationViews"
-import { NavBar } from "./nav/NavBar"
+import { NavBar } from "./navbar/NavBar"
 import { Login } from "./auth/Login"
 import { Register } from "./auth/Register"
 import "./Terrace.css"
@@ -9,7 +9,7 @@ import "./Terrace.css"
 export const Terrace = () => (
     <>
         <Route render={() => {
-            if (localStorage.getItem("kennel_customer")) {
+            if (localStorage.getItem("terrace_token")) {
                 return (
                     <>
                         <Route render={props => <NavBar {...props} />} />

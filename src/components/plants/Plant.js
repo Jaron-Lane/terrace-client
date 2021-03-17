@@ -1,5 +1,5 @@
 import { React } from "react";
-import "./Plant.css";
+import "./Plants.css";
 
 export default ({ plant }) => (
     <section className="plant">

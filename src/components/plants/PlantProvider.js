@@ -6,8 +6,12 @@ export const PlantProvider = (props) => {
     const [ plants, setPlants ] = useState([])
 
     const getPlants = () => {
-        return fetch("http://localhost:8000/plants")
-            .then(res => res.json())
+        return fetch("http://localhost:8000/plants", {
+            headers:{
+                "Authorization": `Token ${localStorage.getItem("terrace_token")}`
+            }
+        })
+            .then(response => response.json())
             .then(setPlants)
     }
 
