@@ -15,9 +15,18 @@ export const PlantProvider = (props) => {
             .then(setPlants)
     }
 
+    const createPlant = (plant) => {
+        return fetch("http://localhost:8000/plants", {
+            method: "POST",
+            headers:{"Authorization": `Token ${localStorage.getItem("terrace_token")}`},
+            body: JSON.stringify(plant)
+        })
+            .then(getPlants)
+    } 
+
     return (
         <PlantContext.Provider value={{
-            plants, setPlants, getPlants
+            plants, setPlants, getPlants, createPlant
         }}>
             {props.children}
         </PlantContext.Provider>
