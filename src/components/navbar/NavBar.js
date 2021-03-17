@@ -15,7 +15,9 @@ export const NavBar = (props) => {
                 <Link className="navbar__link" to="/locations">Locations</Link>
             </li>
             <li className="navbar__item">
-                <Link className="navbar__link" to="/logout">Logout</Link>
+                <Link className="navbar__link" 
+                onClick={() => {
+                    localStorage.removeItem("terrace_token")}} to="/login">Logout</Link>
             </li>
         </ul>
     )
