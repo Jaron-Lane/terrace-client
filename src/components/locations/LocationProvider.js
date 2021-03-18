@@ -15,9 +15,20 @@ export const LocationProvider = (props) => {
             .then(setLocations)
     }
 
+    const createLocations = (location) => {
+        return fetch("http://localhost:8000/locations", {
+            method: "POST",
+            headers:{
+                "Authorization": `Token ${localStorage.getItem("terrace_token")}`
+            },
+            body: JSON.stringify(location)
+        })
+            .then(getLocations)
+    }
+
     return (
         <LocationContext.Provider value={{
-            locations, setLocations, getLocations
+            locations, setLocations, getLocations, createLocations
         }}>
             {props.children}
         </LocationContext.Provider>
