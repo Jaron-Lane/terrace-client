@@ -4,6 +4,7 @@ import { PlantProvider } from "./plants/PlantProvider";
 import { PlantList } from "./plants/PlantList";
 import { LocationProvider } from "./locations/LocationProvider";
 import { LocationList } from "./locations/LocationList";
+import { PlantForm } from "./plants/PlantForm";
 
 export const ApplicationViews = () => {
     return (
@@ -15,13 +16,15 @@ export const ApplicationViews = () => {
             </PlantProvider>
 
             <PlantProvider>
-                <Route exact path="/plants">
-                    <PlantList />
-                </Route>
+                <LocationProvider>
+                    <Route exact path="/plants">
+                        <PlantList />
+                    </Route>
 
-                <Route exact path="/plants/create">
-                    <PlantForm />
-                </Route>
+                    <Route exact path="/plants/create">
+                        <PlantForm />
+                    </Route>
+                </LocationProvider>
             </PlantProvider>
 
             <LocationProvider>
