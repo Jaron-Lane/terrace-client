@@ -19,7 +19,8 @@ export const LocationProvider = (props) => {
         return fetch("http://localhost:8000/locations", {
             method: "POST",
             headers:{
-                "Authorization": `Token ${localStorage.getItem("terrace_token")}`
+                Authorization: `Token ${localStorage.getItem("terrace_token")}`,
+                "Content-Type": "application/json"
             },
             body: JSON.stringify(location)
         })
