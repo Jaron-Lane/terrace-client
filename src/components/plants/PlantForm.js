@@ -5,10 +5,12 @@ import { PlantContext } from "./PlantProvider";
 
 export const PlantForm = () => {
     const history = useHistory()
-    const { plants, getPlants, createPlant } = useContext(PlantContext)
+    const { getPlants, createPlant } = useContext(PlantContext)
     const { locations, getLocations } = useContext(LocationContext)
 
-    const [ plant, setPlant ] = useState({})
+    const [ plant, setPlant ] = useState({
+        // You could put default values to prevent breaking in the future
+    })
 
     useEffect(() => {
         getPlants()
@@ -18,6 +20,7 @@ export const PlantForm = () => {
     const handleControlledInputChange = (event) => {
         const newPlantState = Object.assign({}, plant)
         newPlantState[event.target.name] = event.target.value
+        // event.target.name is grabbing the name value of the input field element!!!
         setPlant(newPlantState)
     }
 
@@ -29,7 +32,8 @@ export const PlantForm = () => {
             window.alert("Please Pick a Room")
         } else {
             createPlant({
-                user: parseInt(localStorage.getItem("terrace_token")),
+                // on the left side of the colon are the key values of the new plant. Also a user doesnt need to be passed because
+                // the server side is receiving it through the request.auth.user
                 title: plant.title,
                 nick_name: plant.nickName,
                 location_id: locationId,
@@ -40,7 +44,7 @@ export const PlantForm = () => {
         }
     }
 
-    console.log("incoming plant", plant)
+    // console.log("incoming plant", plant)
     return (
         <form className="plantForm">
             <h2 className="plantForm__header">Add New Plant</h2>
@@ -58,9 +62,9 @@ export const PlantForm = () => {
             <fieldset>
                 <div className="form-group">
                     <label htmlFor="name">Nick Name: </label>
-                    <input type="text" name="name" required autoFocus className="form-control"
+                    <input type="text" name="nickName" required autoFocus className="form-control"
                         placeholder="Larry, Moe, Curly, etc..."
-                        defaultValue={plant.nick_name}
+                        defaultValue={plant.nickName}
                         onChange={handleControlledInputChange}
                     />
                 </div>
@@ -92,10 +96,10 @@ export const PlantForm = () => {
             </fieldset>
             <fieldset>
                 <div className="form-group">
-                    <label htmlFor="watering_frequency">Scheduled Watering: </label>
-                    <input type="text" name="watering_frequency" required className="form-control"
+                    <label htmlFor="wateringFrequency">Scheduled Watering: </label>
+                    <input type="text" name="wateringFrequency" required className="form-control"
                         placeholder="How many days between watering?"
-                        defaultValue={plant.watering_frequency}
+                        defaultValue={plant.wateringFrequency}
                         onChange={handleControlledInputChange}
                     />
                 </div>

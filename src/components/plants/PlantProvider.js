@@ -8,7 +8,7 @@ export const PlantProvider = (props) => {
     const getPlants = () => {
         return fetch("http://localhost:8000/plants", {
             headers:{
-                "Authorization": `Token ${localStorage.getItem("terrace_token")}`
+                "Authorization": `Token ${localStorage.getItem("terrace_token")}`,
             }
         })
             .then(response => response.json())
@@ -18,7 +18,10 @@ export const PlantProvider = (props) => {
     const createPlant = (plant) => {
         return fetch("http://localhost:8000/plants", {
             method: "POST",
-            headers:{"Authorization": `Token ${localStorage.getItem("terrace_token")}`},
+            headers:{
+                Authorization: `Token ${localStorage.getItem("terrace_token")}`,
+                "Content-Type": "application/json",
+            },
             body: JSON.stringify(plant)
         })
             .then(getPlants)
