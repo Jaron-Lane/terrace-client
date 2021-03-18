@@ -13,7 +13,7 @@ export const PlantForm = () => {
     })
 
     useEffect(() => {
-        getPlants()
+        // getPlants()
         getLocations()
     }, [])
 

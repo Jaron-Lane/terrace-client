@@ -4,7 +4,7 @@ import { LocationContext } from "./LocationProvider";
 
 export const LocationForm = () => {
     const history = useHistory()
-    const { getLocations, createLocations } = useContext(LocationContext)
+    const { createLocations } = useContext(LocationContext)
 
     const [ location, setLocation ] = useState({})
 
@@ -15,11 +15,17 @@ export const LocationForm = () => {
     }
     
     const createNewLocation = () => {
-        createLocations({
-            name: location.name,
-            lighting: location.lighting
-        }).then(() => history.push("/locations"))
+
+        if (location.lighting === "0") {
+            window.alert("Please select an amount of natural light")
+        } else {
+            createLocations({
+                name: location.name,
+                lighting: location.lighting
+            }).then(() => history.push("/locations"))
+        }
     }
+    console.log("incoming", location)
 
     return (
         <form className="locationForm">
@@ -42,9 +48,9 @@ export const LocationForm = () => {
                         onChange={controlledInputChange}>
 
                         <option value="0">Select Lighting</option>
-                        <option value="1">Low Light</option>
-                        <option value="2">Medium Light</option>
-                        <option value="3">High Light</option>
+                        <option value="Low Light">Low Light</option>
+                        <option value="Medium Light">Medium Light</option>
+                        <option value="High Light">High Light</option>
                     </select>
                 </div>
             </fieldset>
