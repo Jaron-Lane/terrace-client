@@ -15,7 +15,8 @@ export const LocationForm = () => {
     }
     
     const createNewLocation = () => {
-
+        // If statement needs to be matched against "0" instead of 0.
+        // Models wont accept integers for this field
         if (location.lighting === "0") {
             window.alert("Please select an amount of natural light")
         } else {
@@ -47,6 +48,7 @@ export const LocationForm = () => {
                         value={location.lighting}
                         onChange={controlledInputChange}>
 
+                        {/* Values are stored as strings */}
                         <option value="0">Select Lighting</option>
                         <option value="Low Light">Low Light</option>
                         <option value="Medium Light">Medium Light</option>
