@@ -5,7 +5,7 @@ import { PlantContext } from "./PlantProvider";
 
 export const PlantForm = () => {
     const history = useHistory()
-    const { getPlants, createPlant } = useContext(PlantContext)
+    const { plants, getPlants, createPlant } = useContext(PlantContext)
     const { locations, getLocations } = useContext(LocationContext)
 
     const [ plant, setPlant ] = useState({
