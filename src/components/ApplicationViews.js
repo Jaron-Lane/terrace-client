@@ -25,6 +25,7 @@ export const ApplicationViews = () => {
                     <Route exact path="/plants/create">
                         <PlantForm />
                     </Route>
+
                 </LocationProvider>
             </PlantProvider>
 
@@ -36,6 +37,10 @@ export const ApplicationViews = () => {
                 <Route path="/locations/create">
                     <LocationForm />
                 </Route>
+
+                <Route path="/locations/edit/:locationId(\d+)" render={
+                    props => <LocationForm {...props} />
+                } />
             </LocationProvider>
         </>
     )

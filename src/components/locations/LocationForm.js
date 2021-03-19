@@ -1,35 +1,68 @@
-import { React, useContext, useState } from "react";
+import { React, useContext, useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import { LocationContext } from "./LocationProvider";
 
-export const LocationForm = () => {
+export const LocationForm = (props) => {
     const history = useHistory()
-    const { createLocations } = useContext(LocationContext)
+    const { locations, getLocations, createLocations, updateLocations } = useContext(LocationContext)
 
     const [ location, setLocation ] = useState({})
+
+    const editMode = props.match.params.hasOwnProperty("locationId") // true or fals
 
     const controlledInputChange = (event) => {
         const newLocationState = Object.assign({}, location)
         newLocationState[event.target.name] = event.target.value
         setLocation(newLocationState)
     }
+
+    /*
+        If there is a URL parameter, then the user has chosen to
+        edit a room.
+            1. Get the value of the URL parameter.
+            2. Use that `id` to find the room.
+            3. Update component state variable.
+    */
+    const getLocationEditMode = () => {
+        if (editMode) {
+            const locationId = parseInt(props.match.params.locationId)
+            const selectedLocation = locations.find(l => l.id === locationId)
+            setLocation(selectedLocation)
+        }
+    }
+
+    useEffect(() => {
+        getLocations()
+    }, [])
+
+    // Once provider state is updated, determine the animal (if edit)
+    useEffect(() => {
+        getLocationEditMode()
+    }, [locations])
     
     const createNewLocation = () => {
-
         if (location.lighting === "0") {
             window.alert("Please select an amount of natural light")
         } else {
-            createLocations({
-                name: location.name,
-                lighting: location.lighting
-            }).then(() => history.push("/locations"))
+            if (editMode) {
+                updateLocations({
+                    id: location.id,
+                    name: location.name,
+                    lighting: location.lighting
+                }).then(() => history.push("/locations"))
+            } else {
+                createLocations({
+                    name: location.name,
+                    lighting: location.lighting
+                }).then(() => history.push("/locations"))
+            }
         }
     }
-    console.log("incoming", location)
+    // console.log("incoming", location)
 
     return (
         <form className="locationForm">
-            <h2 className="locationForm__header">Add a Room</h2>
+            <h2 className="locationForm__header">{editMode ? "Update a Room" : "Add a Room"}</h2>
             <fieldset>
                 <div className="form-group">
                     <label htmlFor="name">Room Name:</label>
@@ -60,8 +93,7 @@ export const LocationForm = () => {
                     createNewLocation()
                 }}
                 className="btn btn-primary">
-                {/* {editMode ? "Save Updates" : "Make Reservation"} */}
-                Submit
+                {editMode ? "Save Updates" : "Make Room"}
             </button>
         </form>
     )
