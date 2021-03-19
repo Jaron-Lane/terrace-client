@@ -8,7 +8,7 @@ export const LocationForm = (props) => {
 
     const [ location, setLocation ] = useState({})
 
-    const editMode = props.match.params.hasOwnProperty("locationId")
+    const editMode = props.match.params.hasOwnProperty("locationId") // true or fals
 
     const controlledInputChange = (event) => {
         const newLocationState = Object.assign({}, location)
@@ -16,6 +16,13 @@ export const LocationForm = (props) => {
         setLocation(newLocationState)
     }
 
+    /*
+        If there is a URL parameter, then the user has chosen to
+        edit a room.
+            1. Get the value of the URL parameter.
+            2. Use that `id` to find the room.
+            3. Update component state variable.
+    */
     const getLocationEditMode = () => {
         if (editMode) {
             const locationId = parseInt(props.match.params.locationId)
@@ -28,6 +35,7 @@ export const LocationForm = (props) => {
         getLocations()
     }, [])
 
+    // Once provider state is updated, determine the animal (if edit)
     useEffect(() => {
         getLocationEditMode()
     }, [locations])
