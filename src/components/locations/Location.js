@@ -18,7 +18,9 @@ export const Location = ({ location }) => {
         <section className="location">
             <h3 className="location__name">{ location.name }</h3>
             <div className="location__lighting">{ location.lighting }</div>
-            <button>
+            <button onClick={() => {
+                history.push(`/locations/edit/${location.id}`)
+            }}>
                 Edit
             </button>
             <button onClick={() => { confirmDelete() }}>

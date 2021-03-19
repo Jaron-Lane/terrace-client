@@ -26,6 +26,18 @@ export const LocationProvider = (props) => {
         })
             .then(getLocations)
     }
+    
+    const updateLocations = (location) => {
+        return fetch(`http://localhost:8000/locations/${location.id}`, {
+            method: "PUT",
+            headers: {
+                Authorization: `Token ${localStorage.getItem("terrace_token")}`,
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(location)
+        })
+            .then(getLocations)
+    }
 
     const deleteLocation = (locationId) => {
         return fetch(`http://localhost:8000/locations/${locationId}`, {
@@ -40,7 +52,7 @@ export const LocationProvider = (props) => {
     return (
         <LocationContext.Provider value={{
             locations, setLocations, getLocations, 
-            createLocations, deleteLocation
+            createLocations, deleteLocation, updateLocations
         }}>
             {props.children}
         </LocationContext.Provider>
