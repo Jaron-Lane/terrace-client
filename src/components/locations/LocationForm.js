@@ -49,7 +49,7 @@ export const LocationForm = (props) => {
                     id: location.id,
                     name: location.name,
                     lighting: location.lighting
-                }).then(() => history.push("/locations"))
+                }).then(() => history.goBack())
             } else {
                 createLocations({
                     name: location.name,
