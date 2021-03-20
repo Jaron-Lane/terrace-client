@@ -15,10 +15,11 @@ export const PlantDetails = (props) => {
 
     return (
         <section className="plant">
-            <h3 className="plant__name">{ plant.nick_name }</h3>
+            <h4 className="plant__name">{ plant.nick_name }</h4>
             <small className="plant__title">{ plant.title }</small>
             <div className="plant__location">Location: { plant.location?.name }</div>
-            <div className="plant__lighting">{ plant.location?.lighting }</div>
+            <div className="plant__lighting">Lighting: { plant.location?.lighting }</div>
+            <div className="plant__watering">Water every { plant.watering_frequency } days</div>
             <div className="plant__about">About: { plant.about }</div>
 
             <button>Edit</button>
