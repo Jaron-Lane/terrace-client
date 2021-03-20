@@ -1,8 +1,10 @@
 import { React, useContext, useEffect, useState } from "react";
+import { useHistory } from "react-router";
 import { PlantContext } from "./PlantProvider";
 import "./Plants.css";
 
 export const PlantDetails = (props) => {
+    const history = useHistory();
     const { getPlantById } = useContext(PlantContext)
 
     const [ plant, setPlant ] = useState({})
@@ -21,7 +23,10 @@ export const PlantDetails = (props) => {
             <div className="plant__lighting">Lighting: { plant.location?.lighting }</div>
             <div className="plant__watering">Water every { plant.watering_frequency } days</div>
             <div className="plant__about">About: { plant.about }</div>
-
+            <button onClick={event => {
+                event.preventDefault()
+                history.goBack()
+            }}>Back</button>
             <button>Edit</button>
 
             <button>Delete</button>
