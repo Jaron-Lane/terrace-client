@@ -16,8 +16,12 @@ export const PlantProvider = (props) => {
     }
 
     const getPlantById = (id) => {
-        return fetch(`http://localhost:8000/plants/${id}?_expand=location`)
-        .then(res => res.json)
+        return fetch(`http://localhost:8000/plants/${id}?_expand=location`, {
+            headers:{
+                "Authorization": `Token ${localStorage.getItem("terrace_token")}`,
+            }
+        })
+        .then(res => res.json())
     }
 
     const createPlant = (plant) => {
