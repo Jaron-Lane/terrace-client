@@ -36,10 +36,20 @@ export const PlantProvider = (props) => {
             .then(getPlants)
     } 
 
+    const deletePlant = (plantId) => {
+        return fetch(`http://localhost:8000/plants/${plantId}`, {
+            method: "DELETE",
+            headers: {
+                Authorization: `Token ${localStorage.getItem("terrace_token")}`,
+            },
+        })
+            .then(getPlants)
+    }
+
     return (
         <PlantContext.Provider value={{
             plants, setPlants, getPlants, 
-            createPlant, getPlantById
+            createPlant, getPlantById, deletePlant
         }}>
             {props.children}
         </PlantContext.Provider>

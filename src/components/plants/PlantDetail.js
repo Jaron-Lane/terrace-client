@@ -5,7 +5,7 @@ import "./Plants.css";
 
 export const PlantDetails = (props) => {
     const history = useHistory();
-    const { getPlantById } = useContext(PlantContext)
+    const { getPlantById, deletePlant } = useContext(PlantContext)
 
     const [ plant, setPlant ] = useState({})
 
@@ -14,6 +14,14 @@ export const PlantDetails = (props) => {
         getPlantById(plantId)
             .then(setPlant)
     }, [])
+
+    const confirmDelete = () => {
+        const d = window.confirm("Are you sure?")
+        if(d === true) {
+            deletePlant(plant.id).then(() => { history.goBack() })
+        }
+    }
+
 
     return (
         <section className="plant">
@@ -29,7 +37,7 @@ export const PlantDetails = (props) => {
             }}>Back</button>
             <button>Edit</button>
 
-            <button>Delete</button>
+            <button onClick={() => { confirmDelete() }}>Delete</button>
         </section>
     )
 }
