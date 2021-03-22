@@ -31,6 +31,9 @@ export const ApplicationViews = () => {
                         props => <PlantDetails {...props} />
                     } />
 
+                    <Route path="/plants/edit/:plantId(\d+)" render={
+                    props => <PlantForm {...props} />
+                    } />
                 </LocationProvider>
             </PlantProvider>
 
