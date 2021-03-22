@@ -1,5 +1,5 @@
 import { React, useContext, useEffect } from "react";
-import TodayCard from "./TodayCard";
+import { TodayCard } from "./TodayCard";
 import { PlantContext } from "./PlantProvider";
 import "./Plants.css";
 

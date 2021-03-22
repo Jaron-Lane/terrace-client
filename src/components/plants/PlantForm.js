@@ -7,12 +7,20 @@ export const PlantForm = (props) => {
     const history = useHistory()
     const { plants, getPlants, createPlant, updatePlant } = useContext(PlantContext)
     const { locations, getLocations } = useContext(LocationContext)
-    const editMode = props.match.params.hasOwnProperty("plantId")
 
     const [ plant, setPlant ] = useState({
         // You could put default values to prevent breaking in the future
     })
     
+    const editMode = props.match.params.hasOwnProperty("plantId")
+    
+    const handleControlledInputChange = (event) => {
+        const newPlantState = Object.assign({}, plant)
+        newPlantState[event.target.name] = event.target.value
+        // event.target.name is grabbing the name value of the input field element!!!
+        setPlant(newPlantState)
+    }
+
     const getPlantEditMode = () => {
         if (editMode) {
             const plantId = parseInt(props.match.params.plantId)
@@ -29,13 +37,6 @@ export const PlantForm = (props) => {
     useEffect(() => {
         getPlantEditMode()
     }, [plants])
-
-    const handleControlledInputChange = (event) => {
-        const newPlantState = Object.assign({}, plant)
-        newPlantState[event.target.name] = event.target.value
-        // event.target.name is grabbing the name value of the input field element!!!
-        setPlant(newPlantState)
-    }
 
     const createNewPlant = () => {
         const locationId = parseInt(plant.locationId)
