@@ -3,19 +3,32 @@ import { useHistory } from "react-router";
 import { LocationContext } from "../locations/LocationProvider";
 import { PlantContext } from "./PlantProvider";
 
-export const PlantForm = () => {
+export const PlantForm = (props) => {
     const history = useHistory()
-    const { getPlants, createPlant } = useContext(PlantContext)
+    const { plants, getPlants, createPlant, updatePlant } = useContext(PlantContext)
     const { locations, getLocations } = useContext(LocationContext)
+    const editMode = props.match.params.hasOwnProperty("plantId")
 
     const [ plant, setPlant ] = useState({
         // You could put default values to prevent breaking in the future
     })
+    
+    const getPlantEditMode = () => {
+        if (editMode) {
+            const plantId = parseInt(props.match.params.plantId)
+            const selectedPlant = plants.find(p => p.id === plantId)
+            setPlant(selectedPlant)
+        }
+    }
 
     useEffect(() => {
-        // getPlants()
+        getPlants()
         getLocations()
     }, [])
+
+    useEffect(() => {
+        getPlantEditMode()
+    }, [plants])
 
     const handleControlledInputChange = (event) => {
         const newPlantState = Object.assign({}, plant)
@@ -31,6 +44,16 @@ export const PlantForm = () => {
         if (locationId === 0) {
             window.alert("Please Pick a Room")
         } else {
+            if (editMode) {
+                updatePlant({
+                    id: plant.id,
+                    title: plant.title,
+                    nick_name: plant.nickName,
+                    location_id: locationId,
+                    about: plant.about,
+                    watering_frequency: wateringFrequency,
+                }).then(() => history.push("/plants"))
+            } else {
             createPlant({
                 // on the left side of the colon are the key values of the new plant. Also a user doesnt need to be passed because
                 // the server side is receiving it through the request.auth.user
@@ -41,14 +64,14 @@ export const PlantForm = () => {
                 watering_frequency: wateringFrequency,
                 // date_watered: Date.now()
             }).then(() => history.push("/plants"))
+            }
         }
     }
 
     // console.log("incoming plant", plant)
     return (
         <form className="plantForm">
-            <h2 className="plantForm__header">Add New Plant</h2>
-            {/* <h2 className="animalForm__title">{editMode ? "Update Animal" : "Admit Animal"}</h2> */}
+            <h2 className="plantForm__header">{editMode ? "Update Your Plant" : "Add a Plant"}</h2>
             <fieldset>
                 <div className="form-group">
                     <label htmlFor="title">Scientific Name: </label>
@@ -104,14 +127,17 @@ export const PlantForm = () => {
                     />
                 </div>
             </fieldset>
+            <button onClick={event => {
+                event.preventDefault()
+                history.goBack()
+            }}>Back</button>
             <button type="submit"
                 onClick={evt => {
                     evt.preventDefault()
                     createNewPlant()
                 }}
                 className="btn btn-primary">
-                {/* {editMode ? "Save Updates" : "Make Reservation"} */}
-                Submit
+                {editMode ? "Save Updates" : "Create Plant"}
             </button>
         </form>
     )

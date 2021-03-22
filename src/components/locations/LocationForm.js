@@ -5,10 +5,13 @@ import { LocationContext } from "./LocationProvider";
 export const LocationForm = (props) => {
     const history = useHistory()
     const { locations, getLocations, createLocations, updateLocations } = useContext(LocationContext)
-
     const [ location, setLocation ] = useState({})
 
-    const editMode = props.match.params.hasOwnProperty("locationId") // true or fals
+    const editMode = props.match.params.hasOwnProperty("locationId") // hasOwnProperty returns a boolean value. (T/F)
+    // Match comes from the react-router-dom library. It gets built into every 
+    // Route. Inside the match object is another object called params.
+    // This holds all matching params where the key is the name we specified 
+    // when creating the route and the value is the actual value in the URL. 
 
     const controlledInputChange = (event) => {
         const newLocationState = Object.assign({}, location)

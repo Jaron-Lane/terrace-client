@@ -6,6 +6,7 @@ import { LocationProvider } from "./locations/LocationProvider";
 import { LocationList } from "./locations/LocationList";
 import { PlantForm } from "./plants/PlantForm";
 import { LocationForm } from "./locations/LocationForm";
+import { PlantDetails } from "./plants/PlantDetail";
 
 export const ApplicationViews = () => {
     return (
@@ -26,6 +27,13 @@ export const ApplicationViews = () => {
                         <PlantForm />
                     </Route>
 
+                    <Route path="/plants/:plantId(\d+)" render={
+                        props => <PlantDetails {...props} />
+                    } />
+
+                    <Route path="/plants/edit/:plantId(\d+)" render={
+                    props => <PlantForm {...props} />
+                    } />
                 </LocationProvider>
             </PlantProvider>
 

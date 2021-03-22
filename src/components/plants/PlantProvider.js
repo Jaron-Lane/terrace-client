@@ -15,6 +15,15 @@ export const PlantProvider = (props) => {
             .then(setPlants)
     }
 
+    const getPlantById = (id) => {
+        return fetch(`http://localhost:8000/plants/${id}?_expand=location`, {
+            headers:{
+                "Authorization": `Token ${localStorage.getItem("terrace_token")}`,
+            }
+        })
+        .then(res => res.json())
+    }
+
     const createPlant = (plant) => {
         return fetch("http://localhost:8000/plants", {
             method: "POST",
@@ -27,9 +36,32 @@ export const PlantProvider = (props) => {
             .then(getPlants)
     } 
 
+    const deletePlant = (plantId) => {
+        return fetch(`http://localhost:8000/plants/${plantId}`, {
+            method: "DELETE",
+            headers: {
+                Authorization: `Token ${localStorage.getItem("terrace_token")}`,
+            },
+        })
+            .then(getPlants)
+    }
+
+    const updatePlant = (plant) => {
+        return fetch(`http://localhost:8000/plants/${plant.id}`, {
+            method: "PUT",
+            headers:{
+                Authorization: `Token ${localStorage.getItem("terrace_token")}`,
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(plant)
+        }).then(getPlants)
+    }
+
     return (
         <PlantContext.Provider value={{
-            plants, setPlants, getPlants, createPlant
+            plants, setPlants, getPlants, 
+            createPlant, getPlantById, 
+            deletePlant, updatePlant
         }}>
             {props.children}
         </PlantContext.Provider>
