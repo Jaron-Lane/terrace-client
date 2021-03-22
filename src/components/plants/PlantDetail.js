@@ -35,7 +35,7 @@ export const PlantDetails = (props) => {
                 event.preventDefault()
                 history.goBack()
             }}>Back</button>
-            <button>Edit</button>
+            <button onClick={() => { history.push(`/plants/edit/${plant.id}`)}}>Edit</button>
 
             <button onClick={() => { confirmDelete() }}>Delete</button>
         </section>
