@@ -16,6 +16,9 @@ export const ApplicationViews = () => {
                 <Route exact path="/">
                     <TodayList />
                 </Route>
+                <Route exact path="/todays_plants">
+                    <TodayList />
+                </Route>
             </PlantProvider>
 
             <PlantProvider>

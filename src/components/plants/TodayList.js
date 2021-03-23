@@ -4,10 +4,10 @@ import { PlantContext } from "./PlantProvider";
 import "./Plants.css";
 
 export const TodayList = () => {
-    const { plants, getPlants } = useContext(PlantContext)
+    const { plants, getTodaysPlants } = useContext(PlantContext)
 
     useEffect(() => {
-        getPlants()
+        getTodaysPlants()
     }, [])
 
     return (
