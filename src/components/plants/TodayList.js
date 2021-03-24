@@ -10,6 +10,7 @@ export const TodayList = () => {
         getTodaysPlants()
     }, [])
 
+console.log(plants)
     return (
         <div className="today" style={{ marginTop: "2rem" }}>
             <h2 className="today__header">Needs Watering</h2>
