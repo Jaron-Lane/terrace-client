@@ -15,6 +15,26 @@ export const PlantProvider = (props) => {
             .then(setPlants)
     }
 
+    const getTodaysPlants = () => {
+        return fetch("http://localhost:8000/plants?todays_plants=true", {
+            headers:{
+                "Authorization": `Token ${localStorage.getItem("terrace_token")}`,
+            }
+        })
+            .then(response => response.json())
+            .then(setPlants)
+    }
+
+    const waterPlants = (plantId) => {
+        return fetch(`http://localhost:8000/plants/${plantId}/water`, {
+            headers:{
+                "Authorization": `Token ${localStorage.getItem("terrace_token")}`,
+                "Content-Type": "application/json",
+            }
+        })
+        .then(getTodaysPlants)
+    }
+
     const getPlantById = (id) => {
         return fetch(`http://localhost:8000/plants/${id}?_expand=location`, {
             headers:{
@@ -61,7 +81,9 @@ export const PlantProvider = (props) => {
         <PlantContext.Provider value={{
             plants, setPlants, getPlants, 
             createPlant, getPlantById, 
-            deletePlant, updatePlant
+            deletePlant, updatePlant,
+            getTodaysPlants, 
+            waterPlants
         }}>
             {props.children}
         </PlantContext.Provider>

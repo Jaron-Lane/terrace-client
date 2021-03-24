@@ -7,13 +7,17 @@ import { LocationList } from "./locations/LocationList";
 import { PlantForm } from "./plants/PlantForm";
 import { LocationForm } from "./locations/LocationForm";
 import { PlantDetails } from "./plants/PlantDetail";
+import { TodayList } from "./plants/TodayList";
 
 export const ApplicationViews = () => {
     return (
         <>
             <PlantProvider>
                 <Route exact path="/">
-                    <PlantList />
+                    <TodayList />
+                </Route>
+                <Route exact path="/todays_plants">
+                    <TodayList />
                 </Route>
             </PlantProvider>
 
@@ -23,10 +27,10 @@ export const ApplicationViews = () => {
                         <PlantList />
                     </Route>
 
-                    <Route exact path="/plants/create">
-                        <PlantForm />
-                    </Route>
-
+                    <Route exact path="/plants/create" render={
+                        props => <PlantForm {...props}/>
+                    } />
+                    
                     <Route path="/plants/:plantId(\d+)" render={
                         props => <PlantDetails {...props} />
                     } />
@@ -42,9 +46,9 @@ export const ApplicationViews = () => {
                     <LocationList />
                 </Route>
 
-                <Route path="/locations/create">
-                    <LocationForm />
-                </Route>
+                <Route exact path="/locations/create" render={
+                        props => <LocationForm {...props}/>
+                    } />
 
                 <Route path="/locations/edit/:locationId(\d+)" render={
                     props => <LocationForm {...props} />

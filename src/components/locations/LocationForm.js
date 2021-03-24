@@ -52,7 +52,7 @@ export const LocationForm = (props) => {
                     id: location.id,
                     name: location.name,
                     lighting: location.lighting
-                }).then(() => history.push("/locations"))
+                }).then(() => history.goBack())
             } else {
                 createLocations({
                     name: location.name,
@@ -90,6 +90,10 @@ export const LocationForm = (props) => {
                     </select>
                 </div>
             </fieldset>
+            <button onClick={event => {
+                event.preventDefault()
+                history.goBack()
+            }}>Back</button>
             <button type="submit"
                 onClick={evt => {
                     evt.preventDefault()
