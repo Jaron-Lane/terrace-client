@@ -49,9 +49,8 @@ export const PlantProvider = (props) => {
             method: "POST",
             headers:{
                 Authorization: `Token ${localStorage.getItem("terrace_token")}`,
-                "Content-Type": "application/json",
             },
-            body: JSON.stringify(plant)
+            body: plant
         })
             .then(getPlants)
     } 

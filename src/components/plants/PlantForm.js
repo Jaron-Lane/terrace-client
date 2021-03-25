@@ -7,6 +7,7 @@ export const PlantForm = (props) => {
     const history = useHistory()
     const { plants, getPlants, createPlant, updatePlant } = useContext(PlantContext)
     const { locations, getLocations } = useContext(LocationContext)
+    const [ file, setFile ] = useState("")
 
     const [ plant, setPlant ] = useState({
         // You could put default values to prevent breaking in the future
@@ -57,16 +58,14 @@ export const PlantForm = (props) => {
                     watering_frequency: wateringFrequency,
                 }).then(() => history.push("/plants"))
             } else {
-            createPlant({
-                // on the left side of the colon are the key values of the new plant. Also a user doesnt need to be passed because
-                // the server side is receiving it through the request.auth.user
-                title: plant.title,
-                nick_name: plant.nickName,
-                location_id: locationId,
-                about: plant.about,
-                watering_frequency: wateringFrequency,
-                // date_watered: Date.now()
-            }).then(() => history.push("/plants"))
+                const formData = new FormData()
+                formData.append("title", plant.title)
+                formData.append("nick_name", plant.nickName)
+                formData.append("location_id", plant.locationId)
+                formData.append("about", plant.about)
+                formData.append("watering_frequency", plant.wateringFrequency)
+                formData.append("photo", file)
+            createPlant(formData).then(() => history.push("/plants"))
             }
         }
     }
@@ -127,6 +126,14 @@ export const PlantForm = (props) => {
                         placeholder="How many days between watering?"
                         defaultValue={plant.wateringFrequency}
                         onChange={handleControlledInputChange}
+                    />
+                </div>
+            </fieldset>
+            <fieldset>
+                <div className="form-group">
+                    <label htmlFor="photo">Upload a photo: </label>
+                    <input type="file" name="photo" required className="form-control" ref={photo}
+                        onChange={(e) => {setFile(e.target.files[0])}}
                     />
                 </div>
             </fieldset>

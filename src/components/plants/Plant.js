@@ -9,6 +9,7 @@ export default ({ plant }) => (
                 { plant.nick_name }
             </Link>
         </h3>
+        { plant.photo ? <img src={plant.photo} /> : ""}
         <div className="plant__title">{ plant.title }</div>
         <div className="plant__watering_frequency">{ plant.watering_frequency }</div>
     </section>
