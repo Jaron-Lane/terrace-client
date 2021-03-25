@@ -6,7 +6,7 @@ export const LocationForm = (props) => {
     const history = useHistory()
     const { locations, getLocations, createLocations, updateLocations } = useContext(LocationContext)
     const [ location, setLocation ] = useState({})
-    const [ file, setFile ] = useState("")
+    // const [ file, setFile ] = useState("")
     
 
     const editMode = props.match.params.hasOwnProperty("locationId") // hasOwnProperty returns a boolean value. (T/F)
@@ -21,7 +21,7 @@ export const LocationForm = (props) => {
         setLocation(newLocationState)
     }
 
-    const photo = useRef()
+    // const photo = useRef()
 
     /*
         If there is a URL parameter, then the user has chosen to
@@ -58,12 +58,11 @@ export const LocationForm = (props) => {
                     lighting: location.lighting
                 }).then(() => history.goBack())
             } else {
-                const dillon = new FormData()
-                dillon.append("name", location.name)
-                dillon.append("lighting", location.lighting)
-                dillon.append("photo", file)
-
-                createLocations(dillon).then(() => history.push("/locations"))
+                createLocations({
+                    name: location.name,
+                    lighting: location.lighting
+                })
+                .then(() => history.push("/locations"))
             }
         }
     }
@@ -96,14 +95,14 @@ export const LocationForm = (props) => {
                     </select>
                 </div>
             </fieldset>
-            <fieldset>
+            {/* <fieldset>
                 <div className="form-group">
                     <label htmlFor="photo">Upload a photo: </label>
                     <input type="file" name="photo" required className="form-control" ref={photo}
                         onChange={(e) => {setFile(e.target.files[0])}}
                     />
                 </div>
-            </fieldset>
+            </fieldset> */}
             <button onClick={event => {
                 event.preventDefault()
                 history.goBack()
