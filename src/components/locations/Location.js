@@ -18,6 +18,7 @@ export const Location = ({ location }) => {
         <section className="location">
             <h3 className="location__name">{ location.name }</h3>
             <div className="location__lighting">{ location.lighting }</div>
+            { location.photo ? <img src={location.photo} /> : ""}
             <button onClick={() => {
                 history.push(`/locations/edit/${location.id}`)
             }}>

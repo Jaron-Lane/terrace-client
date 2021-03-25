@@ -1,4 +1,4 @@
-import { React, useContext, useEffect, useState } from "react";
+import { React, useContext, useEffect, useRef, useState } from "react";
 import { useHistory } from "react-router";
 import { LocationContext } from "./LocationProvider";
 
@@ -6,6 +6,8 @@ export const LocationForm = (props) => {
     const history = useHistory()
     const { locations, getLocations, createLocations, updateLocations } = useContext(LocationContext)
     const [ location, setLocation ] = useState({})
+    const [ file, setFile ] = useState("")
+    
 
     const editMode = props.match.params.hasOwnProperty("locationId") // hasOwnProperty returns a boolean value. (T/F)
     // Match comes from the react-router-dom library. It gets built into every 
@@ -18,6 +20,8 @@ export const LocationForm = (props) => {
         newLocationState[event.target.name] = event.target.value
         setLocation(newLocationState)
     }
+
+    const photo = useRef()
 
     /*
         If there is a URL parameter, then the user has chosen to
@@ -54,10 +58,12 @@ export const LocationForm = (props) => {
                     lighting: location.lighting
                 }).then(() => history.goBack())
             } else {
-                createLocations({
-                    name: location.name,
-                    lighting: location.lighting
-                }).then(() => history.push("/locations"))
+                const dillon = new FormData()
+                dillon.append("name", location.name)
+                dillon.append("lighting", location.lighting)
+                dillon.append("photo", file)
+
+                createLocations(dillon).then(() => history.push("/locations"))
             }
         }
     }
@@ -88,6 +94,14 @@ export const LocationForm = (props) => {
                         <option value="Medium Light">Medium Light</option>
                         <option value="High Light">High Light</option>
                     </select>
+                </div>
+            </fieldset>
+            <fieldset>
+                <div className="form-group">
+                    <label htmlFor="photo">Upload a photo: </label>
+                    <input type="file" name="photo" required className="form-control" ref={photo}
+                        onChange={(e) => {setFile(e.target.files[0])}}
+                    />
                 </div>
             </fieldset>
             <button onClick={event => {

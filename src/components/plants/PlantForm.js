@@ -1,4 +1,4 @@
-import { React, useContext, useEffect, useState } from "react";
+import { React, useContext, useEffect, useRef, useState } from "react";
 import { useHistory } from "react-router";
 import { LocationContext } from "../locations/LocationProvider";
 import { PlantContext } from "./PlantProvider";
@@ -11,6 +11,8 @@ export const PlantForm = (props) => {
     const [ plant, setPlant ] = useState({
         // You could put default values to prevent breaking in the future
     })
+
+    const photo = useRef()
     
     const editMode = props.match.params.hasOwnProperty("plantId")
     
