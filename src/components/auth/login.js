@@ -42,8 +42,8 @@ export const Login = props => {
             </dialog>
             <section>
                 <form className="form--login" onSubmit={handleLogin}>
-                    <h1>Level Up</h1>
-                    <h2>Please sign in</h2>
+                    <h1>Terrace</h1>
+                    <h3>Please sign in</h3>
                     <fieldset>
                         <label htmlFor="inputEmail"> Email address </label>
                         <input ref={email} type="email" id="email" className="form-control"  placeholder="Email address" required autoFocus />

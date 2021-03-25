@@ -13,7 +13,7 @@ export const TodayCard = ({ plant }) => {
             onClick={evt => {
                 evt.preventDefault()
                 waterPlants(plant.id)
-                }}>Plant is Watered</button>
+                }}>Water Plant</button>
     </section>
     )
 }
