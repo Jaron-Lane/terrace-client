@@ -11,6 +11,11 @@
     margin: 1em 2em;
 }
 
+#today-header {
+    text-align: center;
+    margin: 1em 2em;
+}
+
 #plant-card {
     display: flex;
     align-items: center;
@@ -33,6 +38,19 @@
 }
 
 #plant-detail-flex {
+    display: flex;
+    justify-content: center;
+}
+
+#plant-form-cont {
+    padding: 4em 14em;
+}
+
+.plantForm__header {
+    text-align: center;
+}
+
+#form-buttons-cont {
     display: flex;
     justify-content: center;
 }

@@ -7,10 +7,10 @@ export const NavBar = (props) => {
     return (
         <>
             <Navbar expand="lg">
-                <Navbar.Brand href="#home">Terrace</Navbar.Brand>
+                <Navbar.Brand>Terrace</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
-                    <Nav className="justify-content-center">
+                    <Nav className="ml-auto" >
                         <Nav.Item className="navbar__item active">
                             <Link className="navbar__link" to="/todays_plants">Today</Link>
                         </Nav.Item>
@@ -20,8 +20,6 @@ export const NavBar = (props) => {
                         <Nav.Item className="navbar__item">
                             <Link className="navbar__link" to="/locations">Locations</Link>
                         </Nav.Item>
-                    </Nav>
-                    <Nav className="justify-content-end">
                         <Nav.Item className="navbar__item">
                             <Link className="navbar__link" 
                             onClick={() => {

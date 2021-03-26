@@ -1,0 +1,27 @@
+#outer-location-card {
+    filter: drop-shadow(0 0 0.35rem grey);
+}
+
+#location-card {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding: 4em;
+}
+
+#location-col {
+    padding: 2em;
+}
+
+#location-row {
+    padding: 0 2em;
+}
+
+#location-header {
+    text-align: center;
+    margin: 1em 2em;
+}
+
+#location-button-cont {
+    margin: 1em 0 -1.3em 0;  
+}

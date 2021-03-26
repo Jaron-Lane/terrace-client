@@ -1,4 +1,5 @@
 import { React, useContext } from "react";
+import { Card } from "react-bootstrap";
 import { useHistory } from "react-router";
 import { LocationContext } from "./LocationProvider";
 import "./Locations.css";
@@ -15,17 +16,25 @@ export const Location = ({ location }) => {
     }
 
     return ( 
-        <section className="location">
-            <h3 className="location__name">{ location.name }</h3>
-            <div className="location__lighting">{ location.lighting }</div>
-            <button onClick={() => {
-                history.push(`/locations/edit/${location.id}`)
-            }}>
-                Edit
-            </button>
-            <button onClick={() => { confirmDelete() }}>
-                Delete
-            </button>
-        </section>
+        <Card id="outer-location-card">
+            <Card.Body id="location-card">
+                <Card.Title>
+                    { location.name }
+                </Card.Title>
+                <Card.Subtitle>
+                    { location.lighting }
+                </Card.Subtitle>
+                <div id="location-button-cont">
+                    <button onClick={() => {
+                        history.push(`/locations/edit/${location.id}`)
+                    }}>
+                        Edit
+                    </button>
+                    <button onClick={() => { confirmDelete() }}>
+                        Delete
+                    </button>
+                </div>
+            </Card.Body>
+        </Card>
     )
 }
