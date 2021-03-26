@@ -4,12 +4,16 @@ ul {
     padding: 0;
   }
 
-/* li {
-    float: left;
+a:link {
+    text-decoration: none;
+    color:#454545
 }
-  
-a {
-    display: block;
-    padding: 6px;
-    background-color: #dddddd;
-} */
+
+a:visited {
+    text-decoration: none;
+    color:#454545
+}
+
+a:hover {
+    color: #ffffff;
+}

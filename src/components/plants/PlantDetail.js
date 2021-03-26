@@ -1,4 +1,5 @@
 import { React, useContext, useEffect, useState } from "react";
+import { Card, Col, Row } from "react-bootstrap";
 import { useHistory } from "react-router";
 import { PlantContext } from "./PlantProvider";
 import "./Plants.css";
@@ -24,20 +25,34 @@ export const PlantDetails = (props) => {
 
 
     return (
-        <section className="plant">
-            <h1 className="plant__name">{ plant.nick_name }</h1>
-            <small className="plant__title">{ plant.title }</small>
-            <div className="plant__location">Location: { plant.location?.name }</div>
-            <div className="plant__lighting">Lighting: { plant.location?.lighting }</div>
-            <div className="plant__watering">Water every { plant.watering_frequency } days</div>
-            <div className="plant__about">About: { plant.about }</div>
-            <button onClick={event => {
-                event.preventDefault()
-                history.goBack()
-            }}>Back</button>
-            <button onClick={() => { history.push(`/plants/edit/${plant.id}`)}}>Edit</button>
+        <>
+        <div id="plant-detail-flex">
+            <Card id="outer-plant-detail" style={{ width: '40em' }}>
+                <Card.Body id="plant-card">
+                    <Card.Title>{ plant.nick_name }</Card.Title>
+                    <Card.Subtitle>{ plant.title }</Card.Subtitle>
+                    <Row id="plant-detail-cont">
+                        <Col>
+                            <Card.Text>Location: { plant.location?.name }</Card.Text>
+                            <Card.Text>Lighting: { plant.location?.lighting }</Card.Text>
+                            <Card.Text>Water every { plant.watering_frequency } days</Card.Text>
+                        </Col>
+                        <Col>
+                            <Card.Text>{ plant.about }</Card.Text>
+                        </Col>
+                    </Row>
+                    <div>
+                        <button onClick={event => {
+                            event.preventDefault()
+                            history.goBack()
+                        }}>Back</button>
+                        <button onClick={() => { history.push(`/plants/edit/${plant.id}`)}}>Edit</button>
 
-            <button onClick={() => { confirmDelete() }}>Delete</button>
-        </section>
+                        <button onClick={() => { confirmDelete() }}>Delete</button>
+                    </div>
+                </Card.Body>
+            </Card>
+        </div>
+        </>
     )
 }

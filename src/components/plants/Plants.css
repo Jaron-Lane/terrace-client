@@ -1,0 +1,38 @@
+#plant-col {
+    padding: 2em;
+}
+
+#plant-row {
+    padding: 0 2em;
+}
+
+#plant-header {
+    text-align: center;
+    margin: 1em 2em;
+}
+
+#plant-card {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding: 4em;
+}
+
+#outer-plant-card {
+    filter: drop-shadow(0 0 0.35rem grey);
+}
+
+#outer-plant-detail {
+    filter: drop-shadow(0 0 0.35rem grey);
+    margin: 8em 0;
+}
+
+#plant-detail-cont {
+    display: flex;
+    padding: 2em 0;
+}
+
+#plant-detail-flex {
+    display: flex;
+    justify-content: center;
+}
