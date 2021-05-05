@@ -1,5 +1,5 @@
 import { React, useContext, useEffect } from "react";
-import { Button, Col, Container, Row } from "react-bootstrap";
+import { Col, Container, Row } from "react-bootstrap";
 import { useHistory } from "react-router";
 import { LocationContext } from "../locations/LocationProvider";
 import Plant from "./Plant";
