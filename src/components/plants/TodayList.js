@@ -2,6 +2,7 @@ import { React, useContext, useEffect } from "react";
 import { TodayCard } from "./TodayCard";
 import { PlantContext } from "./PlantProvider";
 import "./Plants.css";
+import { Col, Container, Row } from "react-bootstrap";
 
 export const TodayList = () => {
     const { plants, getTodaysPlants } = useContext(PlantContext)
@@ -10,15 +11,15 @@ export const TodayList = () => {
         getTodaysPlants()
     }, [])
 
-console.log(plants)
     return (
-        <div className="today" style={{ marginTop: "2rem" }}>
-            <h2 className="today__header">Needs Watering</h2>
-            <div className="today__plants">
-                {
-                    plants.map(plant => <TodayCard key={plant.id} plant={plant} />)
-                }
-            </div>
-        </div>
+        <Container>
+            <h2 id="today-header">Needs Watering</h2>
+                <Row id="plant-row">
+                    {
+                        plants.map(plant => <Col id="plant-col" xs={4}><TodayCard key={plant.id} plant={plant} /></Col>)
+                    }
+                </Row>
+        </Container>
+
     )
 }

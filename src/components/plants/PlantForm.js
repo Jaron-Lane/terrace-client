@@ -1,7 +1,9 @@
 import { React, useContext, useEffect, useState } from "react";
+import { Container } from "react-bootstrap";
 import { useHistory } from "react-router";
 import { LocationContext } from "../locations/LocationProvider";
 import { PlantContext } from "./PlantProvider";
+import "./Plants.css"
 
 export const PlantForm = (props) => {
     const history = useHistory()
@@ -71,75 +73,78 @@ export const PlantForm = (props) => {
 
     // console.log("incoming plant", plant)
     return (
-        <form className="plantForm">
-            <h2 className="plantForm__header">{editMode ? "Update Your Plant" : "Add a Plant"}</h2>
-            <fieldset>
-                <div className="form-group">
-                    <label htmlFor="title">Scientific Name: </label>
-                    <input type="text" name="title" required autoFocus className="form-control"
-                        placeholder="Aloe Vera, Pothos, etc..."
-                        defaultValue={plant.title}
-                        onChange={handleControlledInputChange}
-                    />
-                </div>
-            </fieldset>
-            <fieldset>
-                <div className="form-group">
-                    <label htmlFor="name">Nick Name: </label>
-                    <input type="text" name="nickName" required autoFocus className="form-control"
-                        placeholder="Larry, Moe, Curly, etc..."
-                        defaultValue={plant.nickName}
-                        onChange={handleControlledInputChange}
-                    />
-                </div>
-            </fieldset>
-            <fieldset>
-                <div className="form-group">
-                    <label htmlFor="locationId">Location: </label>
-                    <select name="locationId" className="form-control"
-                        value={plant.locationId}
-                        onChange={handleControlledInputChange}>
+        <Container id="plant-form-cont">
+            <form className="plantForm">
+                <h2 className="plantForm__header">{editMode ? "Update Your Plant" : "Add a Plant"}</h2>
+                <fieldset>
+                    <div className="form-group">
+                        <label htmlFor="title">Scientific Name: </label>
+                        <input type="text" name="title" required autoFocus className="form-control"
+                            placeholder="Aloe Vera, Pothos, etc..."
+                            defaultValue={plant.title}
+                            onChange={handleControlledInputChange}
+                        />
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <div className="form-group">
+                        <label htmlFor="name">Nick Name: </label>
+                        <input type="text" name="nickName" required autoFocus className="form-control"
+                            placeholder="Larry, Moe, Curly, etc..."
+                            defaultValue={plant.nickName}
+                            onChange={handleControlledInputChange}
+                        />
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <div className="form-group">
+                        <label htmlFor="locationId">Location: </label>
+                        <select name="locationId" className="form-control"
+                            value={plant.locationId}
+                            onChange={handleControlledInputChange}>
 
-                        <option value="0">Select a location</option>
-                        {locations.map(e => (
-                            <option key={e.id} value={e.id}>
-                                {e.name}
-                            </option>
-                        ))}
-                    </select>
+                            <option value="0">Select a location</option>
+                            {locations.map(e => (
+                                <option key={e.id} value={e.id}>
+                                    {e.name}
+                                </option>
+                            ))}
+                        </select>
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <div className="form-group">
+                        <label htmlFor="about">about: </label>
+                        <textarea type="text" name="about" className="form-control"
+                            value={plant.about}
+                            onChange={handleControlledInputChange}>
+                        </textarea>
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <div className="form-group">
+                        <label htmlFor="wateringFrequency">Scheduled Watering: </label>
+                        <input type="text" name="wateringFrequency" required className="form-control"
+                            placeholder="How many days between watering?"
+                            defaultValue={plant.wateringFrequency}
+                            onChange={handleControlledInputChange}
+                        />
+                    </div>
+                </fieldset>
+                <div id="form-buttons-cont">
+                    <button onClick={event => {
+                        event.preventDefault()
+                        history.goBack()
+                    }}>Back</button>
+                    <button type="submit"
+                        onClick={evt => {
+                            evt.preventDefault()
+                            createNewPlant()
+                        }}>
+                        {editMode ? "Save Updates" : "Create Plant"}
+                    </button>
                 </div>
-            </fieldset>
-            <fieldset>
-                <div className="form-group">
-                    <label htmlFor="about">about: </label>
-                    <textarea type="text" name="about" className="form-control"
-                        value={plant.about}
-                        onChange={handleControlledInputChange}>
-                    </textarea>
-                </div>
-            </fieldset>
-            <fieldset>
-                <div className="form-group">
-                    <label htmlFor="wateringFrequency">Scheduled Watering: </label>
-                    <input type="text" name="wateringFrequency" required className="form-control"
-                        placeholder="How many days between watering?"
-                        defaultValue={plant.wateringFrequency}
-                        onChange={handleControlledInputChange}
-                    />
-                </div>
-            </fieldset>
-            <button onClick={event => {
-                event.preventDefault()
-                history.goBack()
-            }}>Back</button>
-            <button type="submit"
-                onClick={evt => {
-                    evt.preventDefault()
-                    createNewPlant()
-                }}
-                className="btn btn-primary">
-                {editMode ? "Save Updates" : "Create Plant"}
-            </button>
-        </form>
+            </form>
+        </Container>
     )
 }

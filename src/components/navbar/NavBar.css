@@ -1,0 +1,23 @@
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+
+a:link {
+    text-decoration: none;
+    color:#454545
+}
+
+a:visited {
+    text-decoration: none;
+    color:#454545
+}
+
+a:hover {
+    color: #ffffff;
+}
+
+.navbar__link {
+    margin: 0 1em;
+}

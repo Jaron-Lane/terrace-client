@@ -1,4 +1,5 @@
 import { React, useContext, useEffect } from "react";
+import { Col, Container, Row } from "react-bootstrap";
 import { useHistory } from "react-router";
 import { Location } from "./Location";
 import { LocationContext } from "./LocationProvider";
@@ -13,16 +14,17 @@ export const LocationList = () => {
     }, [])
 
     return (
-        <div style={{ marginTop: "2rem" }}>
+        <Container>
+            <h1 id="location-header">Rooms</h1>
             <button className="btn btn-add-location"
                 onClick={() => {
                     history.push({ pathname: "/locations/create" })
-                }}>Add New Location</button>
-            <div className="locations">
+                }}>+ Add New Location</button>
+            <Row id="location-row">
                 {
-                    locations.map(location => <Location key={location.id} location={location} />)
+                    locations.map(location => <Col id="location-col" xs={4}><Location key={location.id} location={location} /></Col>)
                 }
-            </div>
-        </div>
+            </Row>
+        </Container>
     )
 }

@@ -12,6 +12,7 @@ textarea {
   font-family: "Montserrat", Arial, sans-serif;
   font-size: 14px;
   line-height: 1.5;
+  background-color: #fcf9f6;
 }
 
 h1,
@@ -20,8 +21,9 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: "Patua One", serif;
+  font-family: "Montserrat", Arial, sans-serif;
   letter-spacing: 2px;
+  color:#224229
 }
 
 p {

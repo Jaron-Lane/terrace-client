@@ -1,4 +1,5 @@
 import { React, useContext, useEffect } from "react";
+import { Col, Container, Row } from "react-bootstrap";
 import { useHistory } from "react-router";
 import { LocationContext } from "../locations/LocationProvider";
 import Plant from "./Plant";
@@ -16,16 +17,17 @@ export const PlantList = () => {
     }, [])
 
     return (
-        <div style={{ marginTop: "2rem" }}>
+        <Container>
+            <h1 id="plant-header">Plants</h1>
             { locations[0] ? <button className="btn btn-create-plant"
                 onClick={() => {
                     history.push({ pathname: "/plants/create" })
-                }}>Add New Plant</button> : "Please Create A Location!" }
-            <div className="plants">
+                }}>+ Add New Plant</button> : "Please Create A Location!" }
+            <Row id="plant-row">
                 {
-                    plants.map(plant => <Plant key={plant.id} plant={plant} />)
+                    plants.map(plant => <Col id="plant-col" xs={4}><Plant key={plant.id} plant={plant} /></Col>)
                 }
-            </div>
-        </div>
+            </Row>
+        </Container>
     )
 }

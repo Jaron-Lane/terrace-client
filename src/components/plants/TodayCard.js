@@ -1,4 +1,5 @@
 import { React, useContext } from "react";
+import { Card } from "react-bootstrap";
 import { PlantContext } from "./PlantProvider";
 import "./Plants.css";
 
@@ -6,14 +7,16 @@ export const TodayCard = ({ plant }) => {
     const { waterPlants } = useContext(PlantContext)
 
     return (
-    <section className="plant">
-        <h3 className="plant__nick_name">{ plant.nick_name }</h3>
-        <div className="plant__title">{ plant.location.name }</div>
-        <button type="submit"
-            onClick={evt => {
-                evt.preventDefault()
-                waterPlants(plant.id)
-                }}>Plant is Watered</button>
-    </section>
+        <Card id="outer-plant-card">
+            <Card.Body id="plant-card">
+                <Card.Title>{ plant.nick_name }</Card.Title>
+                <Card.Subtitle>{ plant.location.name }</Card.Subtitle>
+                <button type="submit" id="location-button-cont"
+                    onClick={evt => {
+                        evt.preventDefault()
+                        waterPlants(plant.id)
+                        }}>Water Plant</button>
+            </Card.Body>
+        </Card>
     )
 }
