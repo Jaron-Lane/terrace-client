@@ -16,7 +16,7 @@ export const TodayList = () => {
             <h2 id="today-header">Needs Watering</h2>
                 <Row id="plant-row">
                     {
-                        plants.map(plant => <Col id="plant-col" xs={4}><TodayCard key={plant.id} plant={plant} /></Col>)
+                        plants.map(plant => <Col id="plant-col" xs={4} key={plant.id}><TodayCard plant={plant} /></Col>)
                     }
                 </Row>
         </Container>

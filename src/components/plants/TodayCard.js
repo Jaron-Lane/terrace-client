@@ -7,7 +7,7 @@ export const TodayCard = ({ plant }) => {
     const { waterPlants } = useContext(PlantContext)
 
     return (
-        <Card id="outer-plant-card">
+        <Card id="outer-plant-card" key={plant.id}>
             <Card.Body id="plant-card">
                 <Card.Title>{ plant.nick_name }</Card.Title>
                 <Card.Subtitle>{ plant.location.name }</Card.Subtitle>

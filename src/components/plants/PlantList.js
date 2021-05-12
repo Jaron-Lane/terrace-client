@@ -25,7 +25,7 @@ export const PlantList = () => {
                 }}>+ Add New Plant</button> : "Please Create A Location!" }
             <Row id="plant-row">
                 {
-                    plants.map(plant => <Col id="plant-col" xs={4}><Plant key={plant.id} plant={plant} /></Col>)
+                    plants.map(plant => <Col id="plant-col" xs={4} key={plant.id}><Plant plant={plant} /></Col>)
                 }
             </Row>
         </Container>

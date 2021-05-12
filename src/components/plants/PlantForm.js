@@ -9,6 +9,8 @@ export const PlantForm = (props) => {
     const history = useHistory()
     const { plants, getPlants, createPlant, updatePlant } = useContext(PlantContext)
     const { locations, getLocations } = useContext(LocationContext)
+    const [ loading, setLoading ] = useState(false)
+    const [ image, setImage ] = useState("")
 
     const [ plant, setPlant ] = useState({
         // You could put default values to prevent breaking in the future
@@ -30,6 +32,26 @@ export const PlantForm = (props) => {
             setPlant(selectedPlant)
         }
     }
+
+    const uploadImage = async e => {
+        const files = e.target.files
+        const data = new FormData()
+        data.append("file", files[0])
+        data.append("upload_preset", "practiceimages")
+        setLoading(true)
+    
+        const res = await fetch("https://api.cloudinary.com/v1_1/dvtukfool/image/upload", 
+            {
+            method: "POST",
+            body: data
+            })
+    
+        const file = await res.json()
+    
+        console.log(file)
+        setImage(file.secure_url)
+        setLoading(false)
+      }
 
     useEffect(() => {
         getPlants()
@@ -131,6 +153,12 @@ export const PlantForm = (props) => {
                         />
                     </div>
                 </fieldset>
+                <input type="file" name="file" placeholder="Upload an Image"
+                    onChange={uploadImage} />
+
+                    {
+                        loading ? (<h3>Loading ...</h3>) : (<img src={image} style={{width:'300px'}} />)
+                    }
                 <div id="form-buttons-cont">
                     <button onClick={event => {
                         event.preventDefault()

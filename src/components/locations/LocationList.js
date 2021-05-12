@@ -22,7 +22,7 @@ export const LocationList = () => {
                 }}>+ Add New Location</button>
             <Row id="location-row">
                 {
-                    locations.map(location => <Col id="location-col" xs={4}><Location key={location.id} location={location} /></Col>)
+                    locations.map(location => <Col id="location-col" xs={4} key={location.id}><Location location={location} /></Col>)
                 }
             </Row>
         </Container>
