@@ -136,7 +136,7 @@ export const PlantForm = (props) => {
                 </fieldset>
                 <fieldset>
                     <div className="form-group">
-                        <label htmlFor="about">about: </label>
+                        <label htmlFor="about">About: </label>
                         <textarea type="text" name="about" className="form-control"
                             value={plant.about}
                             onChange={handleControlledInputChange}>
@@ -153,12 +153,18 @@ export const PlantForm = (props) => {
                         />
                     </div>
                 </fieldset>
-                <input type="file" name="file" placeholder="Upload an Image"
+                <fieldset>
+                    <div className="form-group">
+                        <label htmlFor="upload">Upload an Image: </label>
+                    </div>
+                </fieldset>
+                    <input type="file" name="file" placeholder="Upload an Image"
                     onChange={uploadImage} />
-
-                    {
-                        loading ? (<h3>Loading ...</h3>) : (<img src={image} style={{width:'300px'}} />)
-                    }
+                    <div>
+                        {
+                            loading ? (<h3>Loading ...</h3>) : (<img src={image} style={{width:'100px'}} />)
+                        }
+                    </div>
                 <div id="form-buttons-cont">
                     <button onClick={event => {
                         event.preventDefault()
